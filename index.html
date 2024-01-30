@@ -234,6 +234,21 @@
             left: 12vw;
             cursor: url('cursor.gif')5 5, auto;
         }
+        #resetButton {
+            position: fixed;
+            top: 20px;
+            left: 70vw;
+            padding: 0px 15px;
+            margin: 20px;
+            font-size: 4.5rem;
+            border: 0px solid #000;
+            border-radius: 10px;
+            color: #000;
+            background-color: rgb(233, 233, 208);
+            cursor: url('cursor.gif')5 5, auto;
+            user-select: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
         /* 상단 버튼 */
         #saveButton {
             position: fixed;
@@ -670,6 +685,8 @@
         <div class="savedCombination" id="comb4"></div>
         <div class="savedCombination" id="comb5"></div>
     </div>
+    <button id="resetButton" onclick="resetApplication()">&#8635;</button>
+
     <div id="saveConfirmationPopup" class="save-popup">조합이 저장되었습니다!</div>
 
     <div class="container">
@@ -765,7 +782,7 @@
     <audio id="pfMusic" src="pf.mp3" muted loop></audio>
     <audio id="cbMusic" src="cb.mp3" muted loop></audio>
     <audio id="trpMusic" src="trp.mp3" muted loop></audio>
-    <audio id="voMusic" src="vo.mp3" loop></audio>
+    <audio id="voMusic" src="vo.mp3" muted loop></audio>
     <script src="script.js"></script>
 </body>
 </html>

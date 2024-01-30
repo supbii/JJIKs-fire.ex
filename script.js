@@ -16,6 +16,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     });
 
+        //초기화 버튼
+    const resetButton = document.getElementById('resetButton');
+    resetButton.addEventListener('click', resetApplication);
+
+    function resetApplication() {
+        location.reload();
+    }
+    
         // 상단 버튼
         let savedStates = [];
 
@@ -33,29 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
             animalMusic.muted = !animalMusic.muted;
             updateAnimalImages(animalId, animalMusic.muted);
             updateSaveButtonState();
-        }
-
-        function loadCombination(index) {
-            const state = savedStates[index];
-        
-            Object.keys(state).forEach(animal => {
-                const isMuted = !state[animal];
-                document.getElementById(`${animal}Music`).muted = isMuted;
-                const standbyImage = document.getElementById(`${animal}standby`);
-                const play1Image = document.getElementById(`${animal}play1`);
-                const play2Image = document.getElementById(`${animal}play2`);
-        
-                if (!isMuted) {
-                    standbyImage.style.display = 'none';
-                    play1Image.style.display = 'block';
-                    play2Image.style.display = 'none';
-                } else {
-                    standbyImage.style.display = 'block';
-                    play1Image.style.display = 'none';
-                    play2Image.style.display = 'none';
-                }
-            });
-            updateSaveButtonState(); // 상태 업데이트 호출 추가
         }
 
         // '저장하기' 버튼 상태 업데이트 함수
@@ -147,6 +132,18 @@ document.addEventListener('DOMContentLoaded', function() {
         function loadCombination(index) {
             const state = savedStates[index];
 
+            // 모든 동물의 상태를 초기화
+            animals.forEach(animal => {
+                const standbyImage = document.getElementById(`${animal}standby`);
+                const play1Image = document.getElementById(`${animal}play1`);
+                const play2Image = document.getElementById(`${animal}play2`);
+
+                standbyImage.style.display = 'none';
+                play1Image.style.display = 'none';
+                play2Image.style.display = 'none';
+            });
+
+            // 불러온 조합의 상태를 적용
             Object.keys(state).forEach(animal => {
                 const isMuted = !state[animal];
                 document.getElementById(`${animal}Music`).muted = isMuted;
@@ -175,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
         // 초기 상태 업데이트
         updateSavedCombinationsUI();
-        updateSaveButtonState();
         updateSaveButtonState();
 
     var vcStandby = document.getElementById('vcstandby');
@@ -652,10 +648,10 @@ document.addEventListener('DOMContentLoaded', function() {
         voPlay1.style.display = 'block';
         voPlay2.style.display = 'none';
         voStandby.style.display = 'none';
-        voMusic.play();
         voMusic.muted = false;
         voTimerId = setTimeout(switchToVoPlay2, play1Duration);
         voShadow.style.display = 'block';
+        updateSaveButtonState();
     }
     
     function switchToVoPlay2() {
@@ -664,6 +660,7 @@ document.addEventListener('DOMContentLoaded', function() {
         voStandby.style.display = 'none';
         voMusic.muted = false;
         voTimerId = setTimeout(switchToVoPlay1, play2Duration);
+        updateSaveButtonState();
     }
     
     function switchToVoStandby() {
@@ -684,6 +681,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
         }, 200);
         isMoved = false;
+        updateSaveButtonState();
     }
 
     voStandby.addEventListener('click', function () {
