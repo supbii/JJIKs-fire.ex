@@ -772,13 +772,6 @@ document.addEventListener('DOMContentLoaded', function() {
         popup.style.display = "block";
         popupBack.style.display = "block";
     };
-    // 팝업 외부 클릭 시 닫기 이벤트
-    window.onclick = function(event) {
-        if (!popup.contains(event.target)) {
-            popup.style.display = "none";
-            popupBack.style.display = "none";
-        }
-    };
     // 오버레이 클릭 시 팝업 닫기
     popupBack.onclick = function() {
         playAllMusic();
