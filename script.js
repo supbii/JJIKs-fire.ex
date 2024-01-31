@@ -133,15 +133,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const state = savedStates[index];
 
             // 모든 동물의 상태를 초기화
-            animals.forEach(animal => {
-                const standbyImage = document.getElementById(`${animal}standby`);
-                const play1Image = document.getElementById(`${animal}play1`);
-                const play2Image = document.getElementById(`${animal}play2`);
-
-                standbyImage.style.display = 'none';
-                play1Image.style.display = 'none';
-                play2Image.style.display = 'none';
-            });
+            switchToVcStandby();
+            switchToFlStandby();
+            switchToUkuStandby();
+            switchToDjbStandby();
+            switchToDrStandby();
+            switchToVnStandby();
+            switchToTrbStandby();
+            switchToGtrStandby();
+            switchToPfStandby();
+            switchToCbStandby();
+            switchToTrpStandby();
+            switchToVoStandby();
 
             // 불러온 조합의 상태를 적용
             Object.keys(state).forEach(animal => {
@@ -153,11 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
                 if (!isMuted) {
                     standbyImage.style.display = 'none';
-                    play1Image.style.display = 'block';
-                    play2Image.style.display = 'none';
-                    if (animal === 'vo') {
-                        switchToVoPlay1();
-                    }
+                    switchToPlay1(animal);
                 } else {
                     standbyImage.style.display = 'block';
                     play1Image.style.display = 'none';
@@ -170,6 +169,49 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         document.getElementById('saveButton').addEventListener('click', saveCurrentState);
     
+        function switchToPlay1(animal) {
+            switch (animal) {
+                case 'vc':
+                    switchToVcPlay1();
+                    break;
+                case 'fl':
+                    switchToFlPlay1();
+                    break;
+                case 'uku':
+                    switchToUkuPlay1();
+                    break;
+                case 'djb':
+                    switchToDjbPlay1();
+                    break;
+                case 'dr':
+                    switchToDrPlay1();
+                    break;
+                case 'vn':
+                    switchToVnPlay1();
+                    break;
+                case 'trb':
+                    switchToTrbPlay1();
+                    break;
+                case 'gtr':
+                    switchToGtrPlay1();
+                    break;
+                case 'pf':
+                    switchToPfPlay1();
+                    break;
+                case 'cb':
+                    switchToCbPlay1();
+                    break;
+                case 'trp':
+                    switchToTrpPlay1();
+                    break;
+                case 'vo':
+                    switchToVoPlay1();
+                    break;
+                default:
+                    break;
+            }
+        }
+        
         // 초기 상태 업데이트
         updateSavedCombinationsUI();
         updateSaveButtonState();
@@ -648,6 +690,7 @@ document.addEventListener('DOMContentLoaded', function() {
         voPlay1.style.display = 'block';
         voPlay2.style.display = 'none';
         voStandby.style.display = 'none';
+        voMusic.play();
         voMusic.muted = false;
         voTimerId = setTimeout(switchToVoPlay2, play1Duration);
         voShadow.style.display = 'block';
